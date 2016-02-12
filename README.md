@@ -1,7 +1,16 @@
 Markdown Format Vim
 ===================
 
-A simple plugin for easily formatting text for markdown styling
+A simple plugin for easily formatting text for markdown styling.
+
+###### Bullet List
+![BulletList](http://i.imgur.com/SIyhUBr.gif)
+
+###### Header One
+![HeaderOne](http://i.imgur.com/5yCN7GM.gif)
+
+###### Numbered List
+![NumberList](http://i.imgur.com/EKg8tcn.gif)
 
 Recommended bindings for your vimrc but feel free to change them to whatever you prefer.
 
