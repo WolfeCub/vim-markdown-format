@@ -1,25 +1,17 @@
-function! HeaderOne()
-	execute "normal! yypv$r="
-endfunction
-
-function! HeaderTwo()
-	execute "normal! yypv$r-"
-endfunction
-
-function! HeaderThree()
-	execute "normal! 0i###\<space>"
-endfunction
-
-function! HeaderFour()
-	execute "normal! 0i####\<space>"
-endfunction
-
-function! HeaderFive()
-	execute "normal! 0i#####\<space>"
-endfunction
-
-function! HeaderSix()
-	execute "normal! 0i######\<space>"
+function! MakeHeader(headnum)
+	if a:headnum == 1
+		execute "normal! yypv$r="
+	elseif a:headnum == 2
+		execute "normal! yypv$r-"
+	elseif a:headnum == 3
+		execute "normal! 0i###\<space>"
+	elseif a:headnum == 4
+		execute "normal! 0i####\<space>"
+	elseif a:headnum == 5
+		execute "normal! 0i#####\<space>"
+	elseif a:headnum == 6
+		execute "normal! 0i######\<space>"
+	endif
 endfunction
 
 function! MakeListOne()
@@ -48,6 +40,26 @@ function! MakeListTwo()
 		call setline(i, temp)
 		let i += 1
 	endwhile
+
+	let aboveln = split(getline(lnum1 - 1))
+	let belowln = split(getline(lnum2 + 1))
+	let linenum = aboveln[0] + 1
+	let i = lnum2 + 1
+
+	let currline = split(getline(i))
+	while (currline != [] && (currline[0] != 0 || currline[0] == '-'))
+		if (currline[0] == '-')
+			let i += 1
+			let currline = split(getline(i))
+		else
+			let currline[0] = linenum . '.'
+			let linenum += 1
+			call setline(i, join(currline))
+			let i += 1
+			let currline = split(getline(i))
+		endif
+	endwhile
+
 endfunction
 
 function! MakeNumberedList()
