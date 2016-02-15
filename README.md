@@ -3,14 +3,15 @@ Markdown Format Vim
 
 A simple plugin for easily formatting text for markdown styling.
 
-###### Bullet List
-![BulletList](http://i.imgur.com/SIyhUBr.gif)
-
-###### Header One
-![HeaderOne](http://i.imgur.com/5yCN7GM.gif)
-
 ###### Numbered List
-![NumberList](http://i.imgur.com/EKg8tcn.gif)
+![NumberList](http://i.imgur.com/j7gIoUe.gif)
+
+###### Headers
+![Headers](http://i.imgur.com/oF4Fadj.gif)
+
+###### Bullet List
+![BulletList](http://i.imgur.com/dVbJF9u.gif)
+
 
 ##### Reccomended Bindings
 These are the binding I personally use in my vimrc as I like have mnemonic keybinds.Feel free to change them to whatever you prefer. Just keep in mind that any visual mode bindings require a `<C-u>` after the `:` for the function to call properly.
