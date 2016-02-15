@@ -43,7 +43,9 @@ function! MakeListTwo()
 
 	let aboveln = split(getline(lnum1 - 1))
 	let belowln = split(getline(lnum2 + 1))
-	let linenum = aboveln[0] + 1
+	if aboveln != []
+		let linenum = aboveln[0] + 1
+	endif
 	let i = lnum2 + 1
 
 	let currline = split(getline(i))
@@ -85,3 +87,10 @@ function! FencedCodeBlock()
 	call append(lnum1 - 1, "```")
 	exec "normal! k"
 endfunction
+
+command! -nargs=1 MakeHeader :call MakeHeader(<f-args>)
+command! -nargs=0 MakeListOne :call MakeListOne()
+command! -nargs=0 MakeListTwo :call MakeListTwo()
+command! -nargs=0 MakeListOne :call MakeListOne()
+command! -nargs=0 MakeNumberedList :call MakeNumberedList()
+command! -nargs=0 FencedCodeBlock :call FencedCodeBlock()
