@@ -102,8 +102,22 @@ function! FencedCodeBlock()
 	exec "normal! k"
 endfunction
 
+function! BlockQuote()
+	let [lnum1, col1] = getpos("'<")[1:2]
+	let [lnum2, col2] = getpos("'>")[1:2]
+
+	let i = lnum1
+
+	while i <= lnum2
+		let temp = "> " . getline(i)
+		call setline(i, temp)
+		let i += 1
+	endwhile
+endfunction
+
 command! -nargs=1 MakeHeader :call MakeHeader(<f-args>)
 command! -nargs=0 MakeList :call MakeList()
 command! -nargs=0 MakeListOne :call MakeListOne()
 command! -nargs=0 MakeNumberedList :call MakeNumberedList()
 command! -nargs=0 FencedCodeBlock :call FencedCodeBlock()
+command! -nargs=0 BlockQuote :call BlockQuote()

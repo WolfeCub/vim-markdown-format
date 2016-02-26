@@ -26,5 +26,6 @@ nnoremap <leader>h6 :MakeHeader 6<cr>
 vnoremap <leader>ll :<C-u>MakeList<cr>
 vnoremap <leader>nl :<C-u>MakeNumberedList<cr>
 vnoremap <leader>cb :<C-u>FencedCodeBlock<cr>
+vnoremap <leader>bq :<C-u>BlockQuote
 ```
 
