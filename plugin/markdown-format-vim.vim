@@ -14,6 +14,20 @@ function! MakeHeader(headnum)
 	endif
 endfunction
 
+function! MakeList()
+	let [lnum1, col1] = getpos("'<")[1:2]
+	let [lnum2, col2] = getpos("'>")[1:2]
+
+	let currline = split(getline(lnum1))
+        
+        if currline[0] == "*" || currline[0] != 0
+                call MakeListTwo()
+        else
+                call MakeListOne()
+        endif
+
+endfunction
+
 function! MakeListOne()
 	let [lnum1, col1] = getpos("'<")[1:2]
 	let [lnum2, col2] = getpos("'>")[1:2]
@@ -89,8 +103,7 @@ function! FencedCodeBlock()
 endfunction
 
 command! -nargs=1 MakeHeader :call MakeHeader(<f-args>)
-command! -nargs=0 MakeListOne :call MakeListOne()
-command! -nargs=0 MakeListTwo :call MakeListTwo()
+command! -nargs=0 MakeList :call MakeList()
 command! -nargs=0 MakeListOne :call MakeListOne()
 command! -nargs=0 MakeNumberedList :call MakeNumberedList()
 command! -nargs=0 FencedCodeBlock :call FencedCodeBlock()
