@@ -82,6 +82,20 @@ function! MakeNumberedList()
 	let [lnum1, col1] = getpos("'<")[1:2]
 	let [lnum2, col2] = getpos("'>")[1:2]
 
+        let currline = split(getline(lnum1))
+
+        if currline[0] > 0 || currline[0] == "*"
+            call MakeNumberedListTwo()
+        else
+            call MakeNumberedListOne()
+        endif
+
+endfunction
+
+function! MakeNumberedListOne()
+	let [lnum1, col1] = getpos("'<")[1:2]
+	let [lnum2, col2] = getpos("'>")[1:2]
+
 	let i = lnum1
 	let j = 1
 
@@ -91,6 +105,45 @@ function! MakeNumberedList()
 		let i += 1
 		let j += 1
 	endwhile
+endfunction
+
+function! MakeNumberedListTwo()
+	let [lnum1, col1] = getpos("'<")[1:2]
+	let [lnum2, col2] = getpos("'>")[1:2]
+
+	let i = lnum1
+        let j = 1
+
+	while i <= lnum2
+		let line = split(getline(i))[1:-1]
+		let var = join(line)
+		let temp = "  " . j . ". " . var
+		call setline(i, temp)
+		let i += 1
+                let j += 1
+	endwhile
+
+	let aboveln = split(getline(lnum1 - 1))
+	let belowln = split(getline(lnum2 + 1))
+	if aboveln != []
+		let linenum = aboveln[0] + 1
+	endif
+	let i = lnum2 + 1
+
+	let currline = split(getline(i))
+	while (currline != [] && (currline[0] != 0 || currline[0] == '-'))
+		if (currline[0] == '-')
+			let i += 1
+			let currline = split(getline(i))
+		else
+			let currline[0] = linenum . '.'
+			let linenum += 1
+			call setline(i, join(currline))
+			let i += 1
+			let currline = split(getline(i))
+		endif
+	endwhile
+        
 endfunction
 
 function! FencedCodeBlock()
