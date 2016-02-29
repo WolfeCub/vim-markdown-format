@@ -173,12 +173,12 @@ function! MakeLink(mode)
                 let [lnum2, col2] = getpos("'>")[1:2]
 
                 call cursor(lnum1, col1)
-                execute "normal! i[]("
+                execute "normal! i["
 
                 call cursor(lnum2, col2)
-                execute "normal! a)"
+                execute "normal! a]()"
                 
-                call cursor(lnum1, col1 + 1)
+                call cursor(lnum2, col2)
 
         elseif a:mode == "n"
                 execute "normal! i[]()\<Esc>hh"
