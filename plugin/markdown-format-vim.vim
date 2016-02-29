@@ -25,7 +25,6 @@ function! MakeList()
         else
                 call MakeListOne()
         endif
-
 endfunction
 
 function! MakeListOne()
@@ -168,9 +167,14 @@ function! BlockQuote()
 	endwhile
 endfunction
 
+function! MakeLink()
+        execute "normal! i[]()\<Esc>hhi"
+endfunction
+
 command! -nargs=1 MakeHeader :call MakeHeader(<f-args>)
 command! -nargs=0 MakeList :call MakeList()
 command! -nargs=0 MakeListOne :call MakeListOne()
 command! -nargs=0 MakeNumberedList :call MakeNumberedList()
 command! -nargs=0 FencedCodeBlock :call FencedCodeBlock()
 command! -nargs=0 BlockQuote :call BlockQuote()
+command! -nargs=0 MakeLink :call MakeLink()
