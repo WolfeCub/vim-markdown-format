@@ -167,8 +167,22 @@ function! BlockQuote()
 	endwhile
 endfunction
 
-function! MakeLink()
-        execute "normal! i[]()\<Esc>hhi"
+function! MakeLink(mode)
+        if a:mode == "v"
+                let [lnum1, col1] = getpos("'<")[1:2]
+                let [lnum2, col2] = getpos("'>")[1:2]
+
+                call cursor(lnum1, col1)
+                execute "normal! i[]("
+
+                call cursor(lnum2, col2)
+                execute "normal! a)"
+                
+                call cursor(lnum1, col1 + 1)
+
+        elseif a:mode == "n"
+                execute "normal! i[]()\<Esc>hh"
+        endif
 endfunction
 
 command! -nargs=1 MakeHeader :call MakeHeader(<f-args>)
@@ -177,4 +191,4 @@ command! -nargs=0 MakeListOne :call MakeListOne()
 command! -nargs=0 MakeNumberedList :call MakeNumberedList()
 command! -nargs=0 FencedCodeBlock :call FencedCodeBlock()
 command! -nargs=0 BlockQuote :call BlockQuote()
-command! -nargs=0 MakeLink :call MakeLink()
+command! -nargs=1 MakeLink :call MakeLink()
